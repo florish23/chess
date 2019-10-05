@@ -39,11 +39,17 @@ bool Figure::check_move(coord pos)
 	{
 		return true;
 	}
+	else if (find_pos(pos) != hit_move.size())
+	{
+		return true;
+	}
 	return false;
 }
 
 void Figure::update_available(figure_name * board[8])
 {
+	available.clear();
+	hit_move.clear();
 	switch (name)
 	{
 	case WhiteKing:
@@ -65,7 +71,7 @@ void Figure::update_available(figure_name * board[8])
 		set_WhitePawn(board);
 		break;
 	case BlackKing:
-		set_Black(board);
+		set_BlackKing(board);
 		break;
 	case BlackQueen:
 		set_BlackQueen(board);
@@ -85,13 +91,6 @@ void Figure::update_available(figure_name * board[8])
 	default:
 		break;
 	}
-	switch (name)
-	{
-	case WhitePawn:
-		break;
-	default:
-		break;
-	}
 }
 
 void Figure::set_WhiteKing(figure_name* board[8])
@@ -106,7 +105,99 @@ void Figure::set_WhiteQueen(figure_name* board[8])
 
 void Figure::set_WhiteRook(figure_name* board[8])
 {
-
+	int x = pos.x, y = pos.y;
+	for (int i = x - 1; i >= 0; i--)
+	{
+		switch (board[i][y])
+		{
+		case none:
+			available.push_back({ i, y });
+			break;
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			hit_move.push_back({ i, y });
+			break;
+		default:
+			break;
+		}
+		if (board[i][y] != none)
+		{
+			break;
+		}
+	}
+	for (int i = x + 1; i < 8; i++)
+	{
+		switch (board[i][y])
+		{
+		case none:
+			available.push_back({ i, y });
+			break;
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			hit_move.push_back({ i, y });
+			break;
+		default:
+			break;
+		}
+		if (board[i][y] != none)
+		{
+			break;
+		}
+	}
+	for (int i = y - 1; i >= 0; i--)
+	{
+		switch (board[x][i])
+		{
+		case none:
+			available.push_back({ x, i });
+			break;
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			hit_move.push_back({ x, i });
+			break;
+		default:
+			break;
+		}
+		if (board[x][i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = y + 1; i < 8; i++)
+	{
+		switch (board[x][i])
+		{
+		case none:
+			available.push_back({ x, i });
+			break;
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			hit_move.push_back({ x, i });
+			break;
+		default:
+			break;
+		}
+		if (board[x][i] != none)
+		{
+			break;
+		}
+	}
 }
 
 void Figure::set_WhiteBishop(figure_name* board[8])
@@ -145,7 +236,7 @@ void Figure::set_WhitePawn(figure_name* board[8])
 			case BlackBishop:
 			case BlackKnight:
 			case BlackPawn:
-				available.push_back({ x + 1, y + 1 });
+				hit_move.push_back({ x + 1, y + 1 });
 				break;
 			default:
 				break;
@@ -160,7 +251,7 @@ void Figure::set_WhitePawn(figure_name* board[8])
 			case BlackBishop:
 			case BlackKnight:
 			case BlackPawn:
-				available.push_back({ x - 1, y + 1 });
+				hit_move.push_back({ x - 1, y + 1 });
 				break;
 			default:
 				break;
@@ -175,7 +266,7 @@ void Figure::set_WhitePawn(figure_name* board[8])
 			case BlackBishop:
 			case BlackKnight:
 			case BlackPawn:
-				available.push_back({ x + 1, y + 1 });
+				hit_move.push_back({ x + 1, y + 1 });
 				break;
 			default:
 				break;
@@ -187,7 +278,7 @@ void Figure::set_WhitePawn(figure_name* board[8])
 			case BlackBishop:
 			case BlackKnight:
 			case BlackPawn:
-				available.push_back({ x - 1, y + 1 });
+				hit_move.push_back({ x - 1, y + 1 });
 				break;
 			default:
 				break;
@@ -208,7 +299,99 @@ void Figure::set_BlackQueen(figure_name* board[8])
 
 void Figure::set_BlackRook(figure_name* board[8])
 {
-
+	int x = pos.x, y = pos.y;
+	for (int i = x - 1; i >= 0; i--)
+	{
+		switch (board[i][y])
+		{
+		case none:
+			available.push_back({ i, y });
+			break;
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			hit_move.push_back({ i, y });
+			break;
+		default:
+			break;
+		}
+		if (board[i][y] != none)
+		{
+			break;
+		}
+	}
+	for (int i = x + 1; i < 8; i++)
+	{
+		switch (board[i][y])
+		{
+		case none:
+			available.push_back({ i, y });
+			break;
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			hit_move.push_back({ i, y });
+			break;
+		default:
+			break;
+		}
+		if (board[i][y] != none)
+		{
+			break;
+		}
+	}
+	for (int i = y - 1; i >= 0; i--)
+	{
+		switch (board[x][i])
+		{
+		case none:
+			available.push_back({ x, i });
+			break;
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			hit_move.push_back({ x, i });
+			break;
+		default:
+			break;
+		}
+		if (board[x][i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = y + 1; i < 8; i++)
+	{
+		switch (board[x][i])
+		{
+		case none:
+			available.push_back({ x, i });
+			break;
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			hit_move.push_back({ x, i });
+			break;
+		default:
+			break;
+		}
+		if (board[x][i] != none)
+		{
+			break;
+		}
+	}
 }
 
 void Figure::set_BlackBishop(figure_name* board[8])
@@ -247,7 +430,7 @@ void Figure::set_BlackPawn(figure_name* board[8])
 			case WhiteBishop:
 			case WhiteKnight:
 			case WhitePawn:
-				available.push_back({ x + 1, y - 1 });
+				hit_move.push_back({ x + 1, y - 1 });
 				break;
 			default:
 				break;
@@ -262,7 +445,7 @@ void Figure::set_BlackPawn(figure_name* board[8])
 			case WhiteBishop:
 			case WhiteKnight:
 			case WhitePawn:
-				available.push_back({ x - 1, y - 1 });
+				hit_move.push_back({ x - 1, y - 1 });
 				break;
 			default:
 				break;
@@ -277,7 +460,7 @@ void Figure::set_BlackPawn(figure_name* board[8])
 			case WhiteBishop:
 			case WhiteKnight:
 			case WhitePawn:
-				available.push_back({ x + 1, y - 1 });
+				hit_move.push_back({ x + 1, y - 1 });
 				break;
 			default:
 				break;
@@ -289,7 +472,7 @@ void Figure::set_BlackPawn(figure_name* board[8])
 			case WhiteBishop:
 			case WhiteKnight:
 			case WhitePawn:
-				available.push_back({ x - 1, y - 1 });
+				hit_move.push_back({ x - 1, y - 1 });
 				break;
 			default:
 				break;

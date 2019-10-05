@@ -39,6 +39,7 @@ private:
 	figure_name name;
 	coord pos;
 	std::vector<coord> available;
+	std::vector<coord> hit_move;
 public:
 	void set_name(figure_name _name);
 	void set_pos(coord _pos);
