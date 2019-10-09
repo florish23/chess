@@ -213,6 +213,7 @@ void Figure::set_WhiteKnight(figure_name* board[8])
 void Figure::set_WhitePawn(figure_name* board[8])
 {
 	int x = pos.x, y = pos.y;
+	int bit = 2 ^ (pos.x + 8 * pos.y);
 	if (y == 7)
 	{
 		//transformation Pawn
