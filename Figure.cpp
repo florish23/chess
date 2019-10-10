@@ -202,7 +202,91 @@ void Figure::set_WhiteRook(figure_name* board[8])
 
 void Figure::set_WhiteBishop(figure_name* board[8])
 {
-
+	int x = pos.x, y = pos.y;
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x - i][y - i])
+		{
+		case none:
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			available.push_back({ x - i, y - i });
+			break;
+		default:
+			break;
+		}
+		if (board[x - i][y - i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x + i][y - i])
+		{
+		case none:
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			available.push_back({ x + i, y - i });
+			break;
+		default:
+			break;
+		}
+		if (board[x + i][y - i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x - i][y + i])
+		{
+		case none:
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			available.push_back({ x - i, y + i });
+			break;
+		default:
+			break;
+		}
+		if (board[x - i][y + i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x + i][y + i])
+		{
+		case none:
+		case BlackKing:
+		case BlackQueen:
+		case BlackRook:
+		case BlackBishop:
+		case BlackKnight:
+		case BlackPawn:
+			available.push_back({ x + i, y + i });
+			break;
+		default:
+			break;
+		}
+		if (board[x + i][y + i] != none)
+		{
+			break;
+		}
+	}
 }
 
 void Figure::set_WhiteKnight(figure_name* board[8])
@@ -397,7 +481,91 @@ void Figure::set_BlackRook(figure_name* board[8])
 
 void Figure::set_BlackBishop(figure_name* board[8])
 {
-
+	int x = pos.x, y = pos.y;
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x - i][y - i])
+		{
+		case none:
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			available.push_back({ x - i, y - i });
+			break;
+		default:
+			break;
+		}
+		if (board[x - i][y - i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x + i][y - i])
+		{
+		case none:
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			available.push_back({ x + i, y - i });
+			break;
+		default:
+			break;
+		}
+		if (board[x + i][y - i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x - i][y + i])
+		{
+		case none:
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			available.push_back({ x - i, y + i });
+			break;
+		default:
+			break;
+		}
+		if (board[x - i][y + i] != none)
+		{
+			break;
+		}
+	}
+	for (int i = 1; i < 8; i++)
+	{
+		switch (board[x + i][y + i])
+		{
+		case none:
+		case WhiteKing:
+		case WhiteQueen:
+		case WhiteRook:
+		case WhiteBishop:
+		case WhiteKnight:
+		case WhitePawn:
+			available.push_back({ x + i, y + i });
+			break;
+		default:
+			break;
+		}
+		if (board[x + i][y + i] != none)
+		{
+			break;
+		}
+	}
 }
 
 void Figure::set_BlackKnight(figure_name* board[8])
