@@ -48,6 +48,8 @@ public:
 	int find_pos(coord pos);
 	bool check_move(coord x);
 	void update_available(figure_name* board[8]);
+	void switch_white(figure_name* board[8], int x, int y);
+	void switch_black(figure_name* board[8], int x, int y);
 	void set_WhiteKing (figure_name* board[8]);
 	void set_WhiteQueen (figure_name* board[8]);
 	void set_WhiteRook (figure_name* board[8]);
