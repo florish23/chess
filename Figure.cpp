@@ -136,7 +136,8 @@ void Figure::set_WhiteKing(figure_name* board[8])
 
 void Figure::set_WhiteQueen(figure_name* board[8])
 {
-
+	set_WhiteBishop(board);
+	set_WhiteRook(board);
 }
 
 void Figure::set_WhiteRook(figure_name* board[8])
@@ -375,7 +376,8 @@ void Figure::set_BlackKing(figure_name* board[8])
 
 void Figure::set_BlackQueen(figure_name* board[8])
 {
-
+	set_BlackBishop(board);
+	set_BlackRook(board);
 }
 
 void Figure::set_BlackRook(figure_name* board[8])
@@ -454,7 +456,79 @@ void Figure::set_BlackBishop(figure_name* board[8])
 
 void Figure::set_BlackKnight(figure_name* board[8])
 {
-
+	int x = pos.x, y = pos.y;
+	if (x != 7)
+	{
+		if (x != 6)
+		{
+			if (y != 7)
+			{
+				//available.push_back({ x + 2, y + 1 });//2
+				switch_white(board, x + 2, y + 1);
+				if (y != 0)
+				{
+					//available.push_back({ x + 2, y - 1 });//3
+					switch_white(board, x + 2, y - 1);
+				}
+			}
+			else
+			{
+				//available.push_back({ x + 2, y - 1 });//3
+				switch_white(board, x + 2, y - 1);
+			}
+		}
+		else if (y < 6)
+		{
+			//available.push_back({ x + 1, y + 2 });//1
+			switch_white(board, x + 1, y + 2);
+			if (y > 1)
+			{
+				//available.push_back({ x + 1, y - 2 });//4
+				switch_white(board, x + 1, y - 2);
+			}
+		}
+		else
+		{
+			//available.push_back({ x + 1, y - 2 });//4
+			switch_white(board, x + 1, y - 2);
+		}
+	}
+	if (x != 0)
+	{
+		if (x != 1)
+		{
+			if (y != 7)
+			{
+				//available.push_back({ x - 2, y + 1 });//7
+				switch_white(board, x - 2, y + 1);
+				if (y != 0)
+				{
+					//available.push_back({ x - 2, y - 1 });//6
+					switch_white(board, x - 2, y - 1);
+				}
+			}
+			else
+			{
+				//available.push_back({ x - 2, y - 1 });//6
+				switch_white(board, x - 2, y - 1);
+			}
+		}
+		else if (y < 6)
+		{
+			//available.push_back({ x - 1, y + 2 });//8
+			switch_white(board, x - 1, y + 2);
+			if (y > 1)
+			{
+				//available.push_back({ x - 1, y - 2 });//5
+				switch_white(board, x - 1, y - 2);
+			}
+		}
+		else
+		{
+			//available.push_back({ x - 1, y - 2 });//5
+			switch_white(board, x - 1, y - 2);
+		}
+	}
 }
 
 void Figure::set_BlackPawn(figure_name* board[8])
